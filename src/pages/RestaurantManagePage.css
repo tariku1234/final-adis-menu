@@ -1,0 +1,77 @@
+/* Using global variables from your PublicMenuPage */
+
+.restaurant-manage-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+/* Transparent Hover Effect as requested */
+.restaurant-manage-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    background-color: #D9CFC780 !important; /* Beige #D9CFC7 with ~50% transparency */
+}
+
+.manage-card-cover {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-color: #f0f0f0;
+}
+
+.manage-status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.manage-logo-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: -40px auto 0;
+    position: relative;
+    z-index: 2;
+}
+
+.manage-logo-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.manage-logo-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--text);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+.letter-spacing-1 {
+    letter-spacing: 1px;
+}
+
+/* Modal Consistency */
+.modal-content {
+    border-radius: 24px !important;
+    border: none !important;
+}
+
+.border-dashed {
+    border: 2px dashed #dee2e6 !important;
+}

@@ -1,0 +1,89 @@
+/* Inherits root variables from PublicMenuPage.css */
+
+.public-menu-page {
+    background-color: var(--bg);
+}
+
+.qr-table-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+.qr-table-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+}
+
+.qr-code-preview {
+    background-color: #fcfcfc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+}
+
+.qr-code-preview img {
+    max-width: 90%;
+    filter: contrast(1.1);
+}
+
+.qr-placeholder-icon {
+    width: 100px;
+    height: 100px;
+    background: rgba(243, 176, 56, 0.1);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.letter-spacing-1 {
+    letter-spacing: 1px;
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+.qr-header {
+  background-color: #111217; /* Matches your --text variable */
+  color: #ffffff;
+  padding: 12px 24px; /* 12px top/bottom, 24px side margin */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.qr-header span {
+  letter-spacing: 1.5px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+/* Modal styling */
+.modal-content {
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
+}
+
+/* PDF/Instruction box matching PublicMenu cards */
+.order-summary {
+    background-color: #fff;
+    border: 1px dashed var(--accent);
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.order-summary:hover {
+    background-color: rgba(243, 176, 56, 0.02);
+}
+
+/* Custom badge color to match Addis Menu dark elements */
+.badge.bg-dark {
+    background-color: var(--text) !important;
+    font-weight: 500;
+}

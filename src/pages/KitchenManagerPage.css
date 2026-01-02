@@ -1,0 +1,177 @@
+:root { --accent: #f3b038; }
+/* Root page */
+.kitchen-root {
+  min-height: 100vh;
+  background-color: #f9f8f6 !important;
+  color: #000 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Cards */
+.card-alt {
+  background-color: #d9cfc7 !important;
+  color: #000 !important;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.order-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Order Header */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--accent);
+}
+
+.order-id {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+/* added styling for the table badge in kitchen order cards */
+.table-badge {
+  font-size: 0.9rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background-color: #d9cfc7 !important;
+  color: #000 !important;
+  border: 1px solid var(--accent) !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  background-color: var(--accent) !important;
+}
+
+/* Items List */
+.order-items h6,
+.order-notes h6 {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.items-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--accent);
+}
+
+.items-list li:last-child {
+  border-bottom: none;
+}
+
+.item-qty {
+  background-color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Notes */
+.notes-text {
+  background-color: rgba(201, 181, 156, 0.3);
+  padding: 0.75rem;
+  border-left: 3px solid var(--accent);
+  margin: 0;
+  font-style: italic;
+}
+
+/* Action Button */
+.order-actions {
+  margin-top: 1rem;
+}
+
+.btn-update-status {
+  width: 100%;
+  background-color: var(--accent) !important;
+  color: #000 !important;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-update-status:hover:not(:disabled) {
+  background-color: #b59a7f !important;
+}
+
+.btn-update-status:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.order-completed {
+  text-align: center;
+  padding: 1rem;
+}
+
+.order-completed p {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .kitchen-root h1 {
+    font-size: 1.5rem;
+  }
+
+  .filter-tabs {
+    flex-direction: column;
+  }
+
+  .filter-btn {
+    width: 100%;
+  }
+
+  .order-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

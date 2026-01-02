@@ -1,0 +1,71 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-wrapper {
+  max-width: 450px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.login-card {
+  border: none;
+  border-radius: 15px;
+}
+
+.login-card .card-body {
+  padding: 3rem !important;
+}
+
+.login-page h2 {
+  color: #2d3748;
+  font-size: 28px;
+}
+
+.login-page .text-muted {
+  color: #718096 !important;
+}
+
+.login-page .form-label {
+  font-weight: 500;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.login-page .form-control {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.login-page .form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.login-page .btn-primary {
+  padding: 0.75rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+}
+
+.login-page .btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  transition: all 0.2s;
+}
+
+.login-page .text-primary {
+  color: #667eea !important;
+  text-decoration: none;
+}
+
+.login-page .text-primary:hover {
+  text-decoration: underline;
+}

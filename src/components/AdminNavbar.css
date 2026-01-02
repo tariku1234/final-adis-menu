@@ -1,0 +1,26 @@
+.admin-navbar {
+  background-color: var(--bg) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: 12px 0;
+  box-shadow: 0 6px 18px rgba(10,10,10,0.04);
+}
+
+.admin-navbar .navbar-brand {
+  font-size: 1.25rem;
+  color: var(--text) !important;
+  font-weight: 700;
+}
+
+.admin-navbar .nav-link {
+  color: var(--text) !important;
+  transition: color 0.2s;
+  font-weight: 600;
+}
+
+.admin-navbar .nav-link:hover {
+  color: var(--accent) !important;
+}
+
+.admin-navbar .dropdown-menu {
+  border: 1px solid rgba(0,0,0,0.06);
+} 

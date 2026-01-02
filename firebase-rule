@@ -1,0 +1,144 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    // Helper function to check if user is super admin
+    function isSuperAdmin() {
+      return isSignedIn() && 
+             exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'super_admin';
+    }
+    
+    // Helper function to check if user is restaurant owner
+    function isRestaurantOwner() {
+      return isSignedIn() && 
+             exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'restaurant_owner';
+    }
+    
+    // Helper function to check if user owns the restaurant
+    function ownsRestaurant(restaurantId) {
+      return isSignedIn() &&
+             exists(/databases/$(database)/documents/restaurants/$(restaurantId)) &&
+             get(/databases/$(database)/documents/restaurants/$(restaurantId)).data.ownerId == request.auth.uid;
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      // Anyone can read their own user document
+      allow read: if isSignedIn() && request.auth.uid == userId;
+      
+      // Super admin can read all users
+      allow read: if isSuperAdmin();
+      
+      // Users can create their own document during signup
+      allow create: if isSignedIn() && request.auth.uid == userId;
+      
+      // Users can update their own document
+      allow update: if isSignedIn() && request.auth.uid == userId;
+      
+      // Super admin can update any user (for approval)
+      allow update: if isSuperAdmin();
+      
+      // No one can delete users (only super admin via admin SDK)
+      allow delete: if false;
+    }
+    
+    // Restaurants collection
+    match /restaurants/{restaurantId} {
+      // Restaurant owners can read their own restaurants
+      allow read: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      
+      // Super admin can read all restaurants
+      allow read: if isSuperAdmin();
+      
+      // Restaurant owners can create restaurants
+      allow create: if isRestaurantOwner() && request.resource.data.ownerId == request.auth.uid;
+      
+      // Restaurant owners can update their own restaurants
+      allow update: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      
+      // Restaurant owners can delete their own restaurants
+      allow delete: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      
+      // Super admin can do anything
+      allow read, write: if isSuperAdmin();
+    }
+    
+    // Menu Sections collection
+    match /menu_sections/{sectionId} {
+      // Anyone can read sections (for public menu display)
+      allow read: if true;
+      
+      // Restaurant owners can create sections for their restaurants
+      allow create: if isSignedIn() && 
+                      ownsRestaurant(request.resource.data.restaurantId);
+      
+      // Restaurant owners can update sections for their restaurants
+      allow update: if isSignedIn() && 
+                      ownsRestaurant(resource.data.restaurantId);
+      
+      // Restaurant owners can delete sections for their restaurants
+      allow delete: if isSignedIn() && 
+                      ownsRestaurant(resource.data.restaurantId);
+    }
+    
+    // Menu Items collection
+    match /menu_items/{itemId} {
+      // Anyone can read items (for public menu display)
+      allow read: if true;
+      
+      // Restaurant owners can create items for their restaurants
+      allow create: if isSignedIn() && 
+                      ownsRestaurant(request.resource.data.restaurantId);
+      
+      // Restaurant owners can update items for their restaurants
+      allow update: if isSignedIn() && 
+                      ownsRestaurant(resource.data.restaurantId);
+      
+      // Restaurant owners can delete items for their restaurants
+      allow delete: if isSignedIn() && 
+                      ownsRestaurant(resource.data.restaurantId);
+    }
+    
+    // QR Codes collection
+   match /qr_codes/{qrCodeId} {
+
+  // Anyone can read QR codes
+  allow read: if true;
+
+  // Create QR code
+  allow create: if isSignedIn() &&
+    (
+      ownsRestaurant(request.resource.data.restaurantId)
+      || isSuperAdmin()
+    );
+
+  // Update QR code
+  allow update: if isSignedIn() &&
+    (
+      ownsRestaurant(resource.data.restaurantId)
+      || isSuperAdmin()
+    );
+
+  // Delete QR code
+  allow delete: if isSignedIn() &&
+    (
+      ownsRestaurant(resource.data.restaurantId)
+      || isSuperAdmin()
+    );
+}
+
+    
+    // Default deny all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,418 @@
+:root {
+  --bg: #FFF7EE; /* warm cream */
+  --text: #111217; /* dark text */
+  --accent: #f3b038; /* primary accent (warm yellow) */
+  --muted: #6b6b6b;
+}
+
+.public-menu-page {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Dynamic Navbar Styling */
+.menu-navbar {
+  background-color: var(--bg) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: 15px 0;
+}
+
+.order-header {
+  background: var(--text);
+  color: #fff;
+}
+
+.btn-primary-accent {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.btn-outline-accent {
+  border: 1px solid rgba(0,0,0,0.06);
+  color: var(--text);
+  background: transparent;
+}
+
+.nav-link-custom {
+  color: #444 !important;
+  font-weight: 600;
+  text-transform: capitalize;
+  transition: color 0.3s;
+}
+
+.nav-link-custom:hover {
+  color: var(--accent) !important;
+} 
+
+/* Section Card Layout (not full viewport) */
+.menu-section-container {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 6px 18px rgba(10,10,10,0.04);
+  margin-bottom: 18px;
+}
+
+.section-title-wrapper {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.section-title-text {
+  color: var(--text);
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+} 
+
+/* Items list: stacked rows */
+.items-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0px; /* minimal gap between items */
+  max-width: 920px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.menu-item-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  padding: 2px 6px; /* tighter vertical padding */
+}
+
+.dotted-leader {
+  flex-grow: 1;
+  border-bottom: 1px dotted #ccc;
+  margin: 0 12px;
+  opacity: 0.7;
+}
+
+.item-price-text {
+  font-weight: 400; /* normal weight */
+  color: #000; /* changed to black */
+  white-space: nowrap;
+} 
+
+.item-name-text { font-size: 1rem; font-weight: 400; }
+
+/* Plus icon before food names */
+.plus-icon { color: #000; vertical-align: -2px; }
+
+/* Order button next to price */
+.order-btn {
+  background: var(--accent); /* primary yellowish */
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 12px rgba(243,176,56,0.18);
+}
+.order-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+.order-btn:focus { outline: 2px solid rgba(0,0,0,0.06); outline-offset: 2px; }
+@media (max-width: 576px) { .order-btn { padding: 5px 10px; font-size: 0.85rem; } }
+
+/* Plus open button (only this opens the dish modal) */
+.plus-open-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--accent);
+}
+.plus-open-btn:focus { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+@media (max-width: 576px) { .plus-open-btn { margin-right: 4px; padding: 1px; } }
+
+/* Compact mobile item styles (cardless, match desktop) */
+@media (max-width: 576px) {
+  /* Mobile list items: plain rows with no border or background */
+  .mobile-list-item { margin-bottom: 0px; background: transparent; border: none; box-shadow: none; border-radius: 0; }
+  .mobile-list-item .menu-item-row { padding: 2px 4px; gap: 2px; }
+  .mobile-list-item .item-name-text { font-size: 0.98rem; }
+  .mobile-list-item .item-price-text { font-size: 0.95rem; }
+  .mobile-list-item .order-btn { padding: 3px 6px; font-size: 0.8rem; }
+  .d-lg-none .dotted-leader { margin: 0 3px; }
+}
+
+/* Improve card readability on mobile */
+@media (max-width: 992px) {
+  .menu-section-container { padding: 14px; margin-bottom: 14px; }
+  .section-title-text { font-size: 1.2rem; padding: 6px 16px; }
+  .item-name-text { font-size: 1rem; }
+  .items-list-wrapper { gap: 6px; }
+}
+
+@media (max-width: 576px) {
+  .section-title-text { font-size: 1.1rem; }
+  .item-name-text { font-size: 1rem; }
+  .menu-section-container { padding: 12px; margin-bottom: 12px; }
+  .dotted-leader { margin: 0 8px; }
+  .menu-item-row { padding: 8px 4px; }
+  .mobile-card-img { height: 240px; }
+}
+
+/* Order summary variant */
+.order-summary {
+  background-color: var(--bg);
+  border: 1px dashed var(--accent);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.mobile-order-bar { background: var(--bg); }
+
+/* Mobile meal card image */
+.mobile-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.mobile-card-placeholder { height: 200px; background: linear-gradient(135deg, rgba(243,176,56,0.14), rgba(17,18,23,0.04)); border-top-left-radius: 12px; border-top-right-radius: 12px; }
+
+@media (max-width: 480px) {
+  .mobile-card-img { height: 260px; }
+  .item-name-text { font-size: 1.05rem; }
+  .section-title-text { font-size: 1.05rem; }
+}
+
+/* Narrow mobile viewport: center content and limit width to 420px */
+@media (max-width: 420px) {
+  /* Center the main container and cap its width */
+  .public-menu-page .container {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Ensure inner content aligns and doesn't overflow */
+  .public-menu-page .items-list-wrapper,
+  .public-menu-page .menu-section-container,
+  .public-menu-page .hero-inner {
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Make hero text respect the narrower width */
+  .hero-text div[style] { max-width: 100%; }
+
+  /* Increase spacing and visibility for mobile sections */
+  .items-list-wrapper { gap: 8px; }
+  .menu-section-container {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 12px 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 10px 30px rgba(10,10,10,0.06);
+    margin-bottom: 12px;
+  }
+
+  .section-title-text {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(243,176,56,0.06);
+    color: var(--text);
+    font-weight: 700;
+    font-size: 0.98rem;
+    letter-spacing: 0.6px;
+  }
+
+  /* Make list items look like visible rows/cards */
+  .mobile-list-item {
+    margin-bottom: 6px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 6px 8px;
+    box-shadow: 0 6px 18px rgba(10,10,10,0.06);
+    border: 1px solid rgba(0,0,0,0.035);
+  }
+
+  .menu-item-row { padding: 8px 6px; }
+  .item-name-text { font-size: 1.02rem; font-weight: 600; color: var(--text); }
+  .item-price-text { font-weight: 600; color: #000; }
+  .dotted-leader { border-bottom: 1px dotted rgba(0,0,0,0.12); margin: 0 8px; }
+
+  /* Section-level mobile order bar (shown at end of each section on mobile) */
+  .mobile-section-order-bar {
+    background: rgba(243,176,56,0.04);
+    border-radius: 10px;
+    padding: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+    width: 100%;
+  }
+  .mobile-section-order-bar .item-price-text { font-weight: 700; }
+  .mobile-section-order-bar .btn-primary-accent { font-size: 0.95rem; padding: 6px 12px; }
+  @media (max-width: 420px) { .mobile-section-order-bar { padding: 6px; } }
+
+  /* Slightly larger tap targets */
+  .plus-open-btn { padding: 4px; }
+  .order-btn { padding: 6px 10px; }
+
+  /* Payment & feedback spacing and visibility fixes */
+  #payment,
+  #feedback {
+    display: block !important;
+    visibility: visible !important;
+    margin-top: 0.6rem !important;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-top: none !important;
+    scroll-margin-top: 90px;
+  }
+
+  /* Make cards inside payment/feedback full width within container */
+  #payment .mx-auto,
+  #feedback .mx-auto,
+  #payment .card,
+  #feedback .card {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  /* Reduce internal padding and heading spacing for compact mobile fit */
+  #payment h3,
+  #feedback h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  #feedback { padding-top: 1rem; padding-bottom: 1rem; }
+}
+
+/* Make mobile/tablet also more visible and card-like */
+@media (max-width: 768px) {
+  .menu-section-container { box-shadow: 0 10px 30px rgba(10,10,10,0.06); padding: 12px; border-radius: 12px; }
+  .mobile-list-item { box-shadow: 0 8px 20px rgba(10,10,10,0.05); border-radius: 10px; padding: 8px; }
+  .items-list-wrapper { gap: 8px; }
+  .item-name-text { font-weight: 600; }
+  .item-price-text { font-weight: 600; }
+
+  /* Ensure Payment & Feedback are visible and full-width */
+  #payment,
+  #feedback { display: block !important; visibility: visible !important; }
+  #payment .mx-auto, #feedback .mx-auto { max-width: 100% !important; width: 100% !important; }
+}
+ 
+/* Hero visual */
+.hero-inner { gap: 18px; }
+.hero-text h1 { margin-bottom: 4px; }
+.hero-visual { position: relative; width: 380px; height: 260px; }
+.hero-visual-bg {
+  position: relative; right: 0; top: 0;
+  width: 100%; height: 100%; background: linear-gradient(135deg, rgba(243,176,56,0.12), rgba(17,18,23,0.02));
+  border-radius: 28px 6px 6px 28px; transform: none; z-index: 1; overflow: hidden; box-shadow: 0 12px 34px rgba(10,10,10,0.12);
+  background-size: cover; background-position: right center;
+}
+/* overlay to fade image into text area */
+.hero-visual-bg::before {
+  content: '';
+  position: absolute; left: -30px; top: 0; bottom: 0; width: 120px;
+  background: linear-gradient(90deg, rgba(255,247,238,1), rgba(255,247,238,0.0));
+  z-index: 2;
+}
+.hero-visual-img { display: none; }
+
+/* Dish modal image close button */
+.image-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.95);
+  color: #004d40;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.image-close-btn:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 576px) { .image-close-btn { width: 30px; height: 30px; top: 8px; right: 8px; font-size: 18px; } }
+.hero-visual-placeholder { width: 100%; height: 100%; border-radius: 12px; background: linear-gradient(135deg, rgba(243,176,56,0.12), rgba(17,18,23,0.04)); }
+
+@media (max-width: 768px) {
+  .hero-visual { display: none !important; }
+  .hero-inner { flex-direction: column; align-items: center; }
+  .hero-text { text-align: center; }
+  .hero-text div[style] { max-width: 92%; }
+
+  /* Ensure Payment & Feedback are visible and full-width on mobile/tablet */
+  #payment,
+  #feedback {
+    display: block !important;
+    visibility: visible !important;
+    margin-top: 0.8rem !important;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-top: none !important;
+    scroll-margin-top: 90px;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* Make the internal cards take full width and remove centered maxWidth */
+  #payment .mx-auto,
+  #feedback .mx-auto,
+  #payment .card,
+  #feedback .card {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  /* Slightly reduce heading spacing */
+  #payment h3,
+  #feedback h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  /* Make the page and container scrollable on mobile and provide safe bottom padding */
+  html, body, .public-menu-page {
+    height: 100%;
+    min-height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Reserve space for the fixed mobile order bar so it does not overlap content */
+  .public-menu-page { padding-bottom: calc(88px + env(safe-area-inset-bottom, 12px)); }
+
+  /* Ensure container does not clip content */
+  .public-menu-page .container { overflow: visible; }
+}
+

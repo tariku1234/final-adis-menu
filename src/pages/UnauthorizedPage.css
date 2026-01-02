@@ -1,0 +1,22 @@
+.unauthorized-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #d4d7e3 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.unauthorized-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.unauthorized-card {
+  border: none;
+  border-radius: 15px;
+}
+
+.icon-wrapper {
+  color: #e53e3e;
+}

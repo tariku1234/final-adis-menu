@@ -1,0 +1,133 @@
+.menu-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #F9F8F6;
+}
+
+/* Scrollable content only for Menu page */
+.menu-content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.menu-navbar {
+  background-color: #EFE9E3 !important;
+  border-bottom: 1px solid #D9CFC7;
+  padding: 1rem 1.5rem;
+}
+
+/* =========================
+   BODY LAYOUT
+========================= */
+.menu-body {
+  padding: 1.5rem;
+  background-color: #F9F8F6;
+}
+
+.page-header {
+    text-align: center; /* Centers the h1 and p elements */
+    margin-bottom: 2rem; /* Adds space below the header */
+}
+/* =========================
+   MENU CARDS
+========================= */
+.menu-card {
+  background-color: #EFE9E3 !important;
+  border-radius: 14px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #D9CFC7;
+  box-shadow: none !important;
+}
+
+/* =========================
+   MENU ITEMS
+========================= */
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.price {
+  font-size: 0.9rem;
+  color: #000000 !important;
+}
+
+/* =========================
+   BUTTONS (UPDATED)
+========================= */
+.add-btn {
+  width: 40px;
+  height: 40px;
+}
+
+/* --- UPDATED .primary-btn for 'Continue to Feedback' --- */
+.primary-btn {
+  /* Match the menu card background color */
+  background-color: #EFE9E3 !important; 
+  /* Dark text/icon for contrast */
+  color: #333333 !important; 
+  /* Add a subtle border using the border color from the menu cards */
+  border: 1px solid #D9CFC7 !important; 
+
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  /* Slightly darker color on hover for feedback */
+  background-color: #D9CFC7 !important;
+}
+/* --- END UPDATED .primary-btn --- */
+
+
+.add-btn:hover {
+  opacity: 0.9;
+}
+
+/* Menu page button only - does not affect Payment page */
+/* I've kept this general button selector, but it's less specific than .primary-btn */
+button {
+  background-color: #EFE9E3; /* Changed to match the new light palate */
+  color: #333333; 
+  border: 1px solid #D9CFC7; 
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* New style to ensure the 'Continue to Feedback' button is centered */
+/* =========================
+   PAYMENT ACTIONS (FOR CENTERING)
+========================= */
+.page-actions {
+    text-align: center; /* This centers the inline elements (Link, Button) inside the div */
+    margin-top: 2rem;
+}
+
+/* =========================
+   LOGO
+========================= */
+.logo-box {
+  background-color: #D9CFC7 !important;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .menu-content-wrapper {
+    height: auto;
+  }
+}

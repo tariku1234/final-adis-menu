@@ -1,0 +1,46 @@
+:root {
+  --primary: #13ec5b;
+  --dark-bg: #102216;
+  --surface: #1A2E20;
+}
+
+body {
+  background-color: var(--dark-bg);
+  font-family: "Work Sans", sans-serif;
+  color: #e3eae5;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  background-color: var(--dark-bg);
+}
+
+.bg-dark-green {
+  background-color: var(--dark-bg) !important;
+}
+
+.bg-surface {
+  background-color: var(--surface) !important;
+}
+
+.text-surface {
+  color: #e3eae5 !important;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.accordion-item {
+  border-radius: 8px;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+}
+
+/* App shell */
+.app-root {
+  min-height: 100%;
+  background: #102216;
+}

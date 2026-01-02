@@ -1,0 +1,308 @@
+/* --- REVISED BUTTON STYLES (More Specific) --- */
+
+/* Base style for the small "+" button and the "Proceed" button */
+.add-btn,
+.primary-btn-menu {
+  /* Matching the menu-card background: #EFE9E3 */
+  background-color: #efe9e3 !important;
+  /* Dark text/icon for contrast */
+  color: #333333 !important;
+  /* Add a subtle border using the same color as the menu-card border */
+  border: 1px solid #d9cfc7 !important;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Hover effect for all menu buttons */
+.add-btn:hover,
+.primary-btn-menu:hover {
+  /* Slightly darker color on hover */
+  background-color: #d9cfc7 !important;
+}
+
+/* Specific size/padding for the small "+" button */
+.add-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0; /* Reset padding for the small square button */
+}
+
+/* Specific padding for the "Proceed" button */
+.primary-btn-menu {
+  padding: 0.75rem 2rem;
+}
+
+/* Remove blue outline on focus/click for MenuPage buttons */
+.menu-root .primary-btn-menu:focus,
+.menu-root .primary-btn-menu:active,
+.menu-root .add-btn:focus,
+.menu-root .add-btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Add landing page hero section styles */
+.hero-section {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #efe9e3 0%, #f5f0ea 100%);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(243, 176, 56, 0.08) 0%, rgba(17, 18, 23, 0.04) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 20px 0;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #666666;
+  margin-bottom: 0;
+}
+
+/* Add restaurants section styles */
+.restaurants-section {
+  padding: 40px 0;
+  background-color: #ffffff;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.section-description {
+  font-size: 1.1rem;
+  color: #666666;
+  margin-bottom: 0;
+}
+
+/* Add restaurant card styles */
+.restaurant-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.restaurant-card-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-color: #efe9e3;
+}
+
+.restaurant-card-image-placeholder {
+  height: 200px;
+  background: linear-gradient(135deg, #efe9e3 0%, #f5f0ea 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.restaurant-card-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #efe9e3;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333333;
+}
+
+.cuisine-badge {
+  display: inline-block;
+  background-color: #efe9e3;
+  color: #666666;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.card-description {
+  font-size: 0.95rem;
+  color: #666666;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.restaurant-info-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #666666;
+}
+
+.info-item i {
+  color: #d9cfc7;
+  font-size: 1rem;
+}
+
+/* Add view menu button styles */
+.view-menu-btn {
+  background-color: #efe9e3;
+  color: #333333;
+  border: 1px solid #d9cfc7;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-menu-btn:hover {
+  background-color: #d9cfc7;
+  color: #333333;
+  text-decoration: none;
+}
+
+/* Update existing footer styles for landing page */
+.menu-footer {
+  background-color: #f9f7f5;
+  padding: 40px 0;
+  border-top: 1px solid #efe9e3;
+  margin-top: 60px;
+}
+
+.menu-footer p {
+  margin-bottom: 0.5rem;
+}
+
+/* Update menu navbar for landing page */
+.menu-navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #efe9e3;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Add new sections for landing page design */
+.about-section {
+  background-color: #ffffff;
+}
+
+.feature-card {
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, #efe9e3 0%, #f5f0ea 100%);
+  padding: 60px 20px;
+}
+
+.btn-accent {
+  background-color: #f3b038 !important;
+  color: #fff !important;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+  background-color: #e0a02f !important;
+  transform: translateY(-2px);
+}
+
+.btn-outline-accent {
+  border: 2px solid #f3b038 !important;
+  color: #f3b038 !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-accent:hover {
+  background-color: #f3b038 !important;
+  color: #fff !important;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 350px;
+    padding: 40px 20px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .restaurant-card {
+    margin-bottom: 15px;
+  }
+
+  .cta-section {
+    padding: 40px 20px;
+  }
+
+  .feature-card {
+    margin-bottom: 15px;
+  }
+}
