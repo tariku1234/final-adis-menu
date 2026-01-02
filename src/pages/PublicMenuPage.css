@@ -4,7 +4,11 @@
   --accent: #f3b038; /* primary accent (warm yellow) */
   --muted: #6b6b6b;
 }
-
+ .menu-navbar .nav-link.active-menu-link {
+          color: var(--accent) !important; /* Or whatever your primary brand color is */
+          font-weight: bold;
+          border-bottom: 2px solid var(--accent); /* Optional: add a bottom border */
+        }
 .public-menu-page {
   background-color: var(--bg);
   color: var(--text);
