@@ -1,6 +1,7 @@
 "use client"
 import { Container, Row, Col, Card, Navbar, Nav } from "react-bootstrap"
 import logo from "../img/addisMenu.jpg"
+import foodImage from "../img/food.jpg"
 import "./MenuPage.css"
 
 export default function MenuPage() {
@@ -31,7 +32,15 @@ export default function MenuPage() {
       </Navbar>
 
       {/* ===== HERO SECTION ===== */}
-      <div className="hero-section">
+      <div
+        className="hero-section"
+        style={{
+          backgroundImage: `url(${foodImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
+      >
         <div className="hero-overlay">
           <Container>
             <div className="text-center hero-content">

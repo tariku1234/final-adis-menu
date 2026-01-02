@@ -10,7 +10,8 @@ import {
   deleteRestaurant,
 } from "../services/restaurant.service"
 import { Container, Row, Col, Button, Card, Modal, Form, Alert, Spinner, Badge } from "react-bootstrap"
-import { Plus, Edit, Trash2, MapPin, Phone, Utensils, Info, Image as ImageIcon } from 'lucide-react'
+import { Plus, Edit, Trash2, MapPin, Phone, Utensils, ImageIcon } from "lucide-react"
+import AdminNavbar from "../components/AdminNavbar"
 import "./RestaurantManagePage.css"
 
 export default function RestaurantManagePage() {
@@ -91,7 +92,7 @@ export default function RestaurantManagePage() {
     setSubmitting(true)
     setError("")
     try {
-      let result = editingRestaurant 
+      const result = editingRestaurant
         ? await updateRestaurant(editingRestaurant.id, formData, logoFile, coverFile)
         : await createRestaurant(currentUser.uid, formData, logoFile, coverFile)
 
@@ -130,14 +131,16 @@ export default function RestaurantManagePage() {
     navigate("/admin/dashboard")
   }
 
-  if (loading) return (
-    <div className="vh-100 d-flex justify-content-center align-items-center public-menu-page">
-      <Spinner animation="border" style={{color: 'var(--accent)'}} />
-    </div>
-  )
+  if (loading)
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center public-menu-page">
+        <Spinner animation="border" style={{ color: "var(--accent)" }} />
+      </div>
+    )
 
   return (
     <div className="public-menu-page min-vh-100">
+      <AdminNavbar />
       <Container className="py-5">
         <Row className="mb-5 align-items-center">
           <Col md={8}>
@@ -151,16 +154,24 @@ export default function RestaurantManagePage() {
           </Col>
         </Row>
 
-        {error && <Alert variant="danger" className="rounded-4 border-0 shadow-sm">{error}</Alert>}
-        {success && <Alert variant="success" className="rounded-4 border-0 shadow-sm">{success}</Alert>}
+        {error && (
+          <Alert variant="danger" className="rounded-4 border-0 shadow-sm">
+            {error}
+          </Alert>
+        )}
+        {success && (
+          <Alert variant="success" className="rounded-4 border-0 shadow-sm">
+            {success}
+          </Alert>
+        )}
 
         <Row className="g-4">
           {restaurants.map((restaurant) => (
             <Col md={6} lg={4} key={restaurant.id}>
               <Card className="border-0 shadow-sm rounded-4 overflow-hidden h-100 restaurant-manage-card">
-                <div 
-                  className="manage-card-cover" 
-                  style={{ backgroundImage: `url(${restaurant.coverImage || '/placeholder-cover.jpg'})` }}
+                <div
+                  className="manage-card-cover"
+                  style={{ backgroundImage: `url(${restaurant.coverImage || "/placeholder-cover.jpg"})` }}
                 >
                   <div className="manage-status-badge">
                     <Badge className={restaurant.status === "active" ? "bg-success" : "bg-secondary"}>
@@ -168,11 +179,15 @@ export default function RestaurantManagePage() {
                     </Badge>
                   </div>
                 </div>
-                
+
                 <Card.Body className="pt-0 position-relative">
                   <div className="manage-logo-wrapper">
                     {restaurant.logo ? (
-                      <img src={restaurant.logo} alt={restaurant.name} className="manage-logo-img" />
+                      <img
+                        src={restaurant.logo || "/placeholder.svg"}
+                        alt={restaurant.name}
+                        className="manage-logo-img"
+                      />
                     ) : (
                       <div className="manage-logo-placeholder">{restaurant.name.charAt(0)}</div>
                     )}
@@ -184,7 +199,7 @@ export default function RestaurantManagePage() {
                       <Utensils size={14} className="text-muted" />
                       <span className="small text-muted">{restaurant.cuisineType || "General"}</span>
                     </div>
-                    
+
                     <div className="text-start p-3 bg-light rounded-3 mb-3">
                       <div className="d-flex align-items-start gap-2 mb-2">
                         <MapPin size={14} className="mt-1 text-accent" />
@@ -197,16 +212,24 @@ export default function RestaurantManagePage() {
                     </div>
 
                     <div className="d-flex gap-2">
-                      <Button 
+                      <Button
                         className="btn-primary-accent flex-grow-1 rounded-pill btn-sm fw-bold"
                         onClick={() => handleSelectRestaurant(restaurant.id)}
                       >
                         Enter Dashboard
                       </Button>
-                      <Button variant="light" className="rounded-circle p-2 border" onClick={() => handleOpenModal(restaurant)}>
+                      <Button
+                        variant="light"
+                        className="rounded-circle p-2 border"
+                        onClick={() => handleOpenModal(restaurant)}
+                      >
                         <Edit size={16} />
                       </Button>
-                      <Button variant="light" className="rounded-circle p-2 border text-danger" onClick={() => handleDelete(restaurant.id)}>
+                      <Button
+                        variant="light"
+                        className="rounded-circle p-2 border text-danger"
+                        onClick={() => handleDelete(restaurant.id)}
+                      >
                         <Trash2 size={16} />
                       </Button>
                     </div>
@@ -240,56 +263,75 @@ export default function RestaurantManagePage() {
               <Col md={12}>
                 <Form.Group className="mb-3">
                   <Form.Label className="small fw-bold text-uppercase letter-spacing-1">Restaurant Name</Form.Label>
-                  <Form.Control 
+                  <Form.Control
                     className="rounded-3 border-light-subtle shadow-none py-2"
-                    name="name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} required 
+                    name="name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
                   />
                 </Form.Group>
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Label className="small fw-bold">Cuisine Type</Form.Label>
-                  <Form.Control 
+                  <Form.Control
                     className="rounded-3 border-light-subtle"
-                    name="cuisineType" value={formData.cuisineType} onChange={(e) => setFormData({...formData, cuisineType: e.target.value})} 
+                    name="cuisineType"
+                    value={formData.cuisineType}
+                    onChange={(e) => setFormData({ ...formData, cuisineType: e.target.value })}
                   />
                 </Form.Group>
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Label className="small fw-bold">Phone Number</Form.Label>
-                  <Form.Control 
+                  <Form.Control
                     className="rounded-3 border-light-subtle"
-                    name="phone" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} 
+                    name="phone"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
                 </Form.Group>
               </Col>
               <Col md={12}>
                 <Form.Group className="mb-3">
                   <Form.Label className="small fw-bold">Address</Form.Label>
-                  <Form.Control 
+                  <Form.Control
                     className="rounded-3 border-light-subtle"
-                    name="address" value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} 
+                    name="address"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   />
                 </Form.Group>
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-4">
-                  <Form.Label className="small fw-bold"><ImageIcon size={14}/> Logo Image</Form.Label>
+                  <Form.Label className="small fw-bold">
+                    <ImageIcon size={14} /> Logo Image
+                  </Form.Label>
                   <Form.Control type="file" className="rounded-3" onChange={(e) => setLogoFile(e.target.files[0])} />
                 </Form.Group>
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-4">
-                  <Form.Label className="small fw-bold"><ImageIcon size={14}/> Cover Photo</Form.Label>
+                  <Form.Label className="small fw-bold">
+                    <ImageIcon size={14} /> Cover Photo
+                  </Form.Label>
                   <Form.Control type="file" className="rounded-3" onChange={(e) => setCoverFile(e.target.files[0])} />
                 </Form.Group>
               </Col>
             </Row>
 
             <div className="d-flex gap-2 mt-2">
-              <Button variant="light" className="flex-grow-1 rounded-pill fw-bold border" onClick={handleCloseModal}>Cancel</Button>
-              <Button className="btn-primary-accent flex-grow-1 rounded-pill fw-bold" type="submit" disabled={submitting}>
+              <Button variant="light" className="flex-grow-1 rounded-pill fw-bold border" onClick={handleCloseModal}>
+                Cancel
+              </Button>
+              <Button
+                className="btn-primary-accent flex-grow-1 rounded-pill fw-bold"
+                type="submit"
+                disabled={submitting}
+              >
                 {submitting ? "Saving..." : "Save Restaurant"}
               </Button>
             </div>

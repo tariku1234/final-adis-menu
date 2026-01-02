@@ -11,7 +11,7 @@
   border-radius: 50%;
   background: white;
   padding: 5px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -63,5 +63,205 @@
 @media (min-width: 992px) {
   .admin-root .container {
     max-width: 1120px;
+  }
+}
+
+/* Enhanced responsive design for AdminPage restaurant management */
+@media (max-width: 1200px) {
+  .admin-root {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .sidebar {
+    width: 200px;
+    padding: 15px;
+  }
+
+  .main-content {
+    flex: 1;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 992px) {
+  .admin-root {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 12px;
+    border-bottom: 1px solid #e9ecef;
+    order: -1;
+  }
+
+  .main-content {
+    height: auto;
+    padding: 12px;
+    overflow: visible;
+  }
+
+  .nav-link {
+    padding: 8px;
+    font-size: 0.95rem;
+  }
+
+  .brand img {
+    width: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    padding: 10px;
+  }
+
+  .nav-link {
+    padding: 6px 8px;
+    font-size: 0.9rem;
+  }
+
+  .admin-logo-preview {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo-edit-badge {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .form-control {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .card {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar {
+    padding: 8px;
+  }
+
+  .brand {
+    gap: 6px;
+  }
+
+  .brand img {
+    width: 30px;
+  }
+
+  .nav-link {
+    padding: 5px 6px;
+    font-size: 0.85rem;
+    gap: 5px;
+  }
+
+  .admin-logo-preview {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+  }
+
+  .logo-edit-badge {
+    width: 26px;
+    height: 26px;
+  }
+
+  .admin-logo-placeholder {
+    font-size: 2.5rem;
+  }
+
+  .main-content {
+    padding: 8px;
+  }
+
+  .form-control {
+    font-size: 0.9rem;
+    padding: 0.35rem 0.6rem;
+  }
+
+  .form-control::placeholder {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .btn-sm {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .card {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .card h3,
+  .card h4,
+  .card h5 {
+    font-size: 1.1rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .sidebar {
+    padding: 6px;
+  }
+
+  .nav-link {
+    padding: 4px 5px;
+    font-size: 0.8rem;
+  }
+
+  .admin-logo-preview {
+    width: 80px;
+    height: 80px;
+  }
+
+  .main-content {
+    padding: 6px;
+  }
+
+  .form-control {
+    font-size: 0.85rem;
+  }
+
+  .card {
+    padding: 8px;
+  }
+
+  .card h3,
+  .card h4,
+  .card h5 {
+    font-size: 1rem;
+  }
+
+  label {
+    font-size: 0.85rem;
   }
 }

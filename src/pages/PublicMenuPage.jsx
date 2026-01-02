@@ -10,8 +10,9 @@ import { db } from "../services/firebase.service"
 // Services
 import { getRestaurantById, getMenuSections, getMenuItems } from "../services/restaurant.service"
 import { useCart } from "../context/CartContext"
-import heroFallback from "../img/menu.webp"
+import foodImage from "../img/food.jpg"
 import "./PublicMenuPage.css"
+
 
 export default function PublicMenuPage() {
   const { restaurantId } = useParams()
@@ -271,7 +272,7 @@ export default function PublicMenuPage() {
               ? `url(${restaurant.heroImage})`
               : restaurant?.image
                 ? `url(${restaurant.image})`
-                : `url(${heroFallback})`,
+                : `url(${foodImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             color: "var(--text)",

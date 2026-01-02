@@ -29,6 +29,7 @@ export default function AdminNavbar() {
             <Nav.Link href="/admin/menu">Menu</Nav.Link>
             <Nav.Link href="/admin/qr">QR Code</Nav.Link>
             <Nav.Link href="/admin/orders">Orders</Nav.Link>
+            <Nav.Link href="/admin">Settings</Nav.Link>
 
             <NavDropdown
               title={

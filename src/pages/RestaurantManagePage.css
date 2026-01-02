@@ -1,77 +1,225 @@
 /* Using global variables from your PublicMenuPage */
 
 .restaurant-manage-card {
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.05) !important;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
 
 /* Transparent Hover Effect as requested */
 .restaurant-manage-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
-    background-color: #D9CFC780 !important; /* Beige #D9CFC7 with ~50% transparency */
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+  background-color: #d9cfc780 !important; /* Beige #D9CFC7 with ~50% transparency */
 }
 
 .manage-card-cover {
-    height: 120px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    background-color: #f0f0f0;
+  height: 120px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  background-color: #f0f0f0;
 }
 
 .manage-status-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .manage-logo-wrapper {
-    width: 80px;
-    height: 80px;
-    margin: -40px auto 0;
-    position: relative;
-    z-index: 2;
+  width: 80px;
+  height: 80px;
+  margin: -40px auto 0;
+  position: relative;
+  z-index: 2;
 }
 
 .manage-logo-img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .manage-logo-placeholder {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: var(--text);
-    color: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: bold;
-    border: 4px solid #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .text-accent {
-    color: var(--accent);
+  color: var(--accent);
 }
 
 .letter-spacing-1 {
-    letter-spacing: 1px;
+  letter-spacing: 1px;
 }
 
 /* Modal Consistency */
 .modal-content {
-    border-radius: 24px !important;
-    border: none !important;
+  border-radius: 24px !important;
+  border: none !important;
 }
 
 .border-dashed {
-    border: 2px dashed #dee2e6 !important;
+  border: 2px dashed #dee2e6 !important;
+}
+
+/* Added comprehensive mobile responsiveness for RestaurantManagePage */
+@media (max-width: 1200px) {
+  .restaurant-manage-card {
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 992px) {
+  .restaurant-manage-card {
+    margin-bottom: 16px;
+  }
+
+  .manage-logo-wrapper {
+    width: 70px;
+    height: 70px;
+    margin: -35px auto 0;
+  }
+
+  .manage-logo-img,
+  .manage-logo-placeholder {
+    border: 3px solid #fff;
+    font-size: 1.5rem;
+  }
+
+  .manage-card-cover {
+    height: 100px;
+  }
+
+  .manage-status-badge {
+    top: 8px;
+    right: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .restaurant-manage-card {
+    margin-bottom: 14px;
+  }
+
+  .manage-card-cover {
+    height: 90px;
+  }
+
+  .manage-logo-wrapper {
+    width: 60px;
+    height: 60px;
+    margin: -30px auto 0;
+  }
+
+  .manage-logo-img,
+  .manage-logo-placeholder {
+    border: 3px solid #fff;
+    font-size: 1.3rem;
+  }
+
+  .manage-status-badge {
+    top: 6px;
+    right: 6px;
+  }
+}
+
+@media (max-width: 576px) {
+  .restaurant-manage-card {
+    margin-bottom: 12px;
+  }
+
+  .manage-card-cover {
+    height: 80px;
+  }
+
+  .manage-logo-wrapper {
+    width: 55px;
+    height: 55px;
+    margin: -27px auto 0;
+  }
+
+  .manage-logo-img,
+  .manage-logo-placeholder {
+    border: 2px solid #fff;
+    font-size: 1.2rem;
+  }
+
+  .restaurant-manage-card .card-body {
+    padding: 0.75rem;
+  }
+
+  .restaurant-manage-card .card-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .restaurant-manage-card .card-text {
+    font-size: 0.9rem;
+  }
+
+  .manage-status-badge {
+    top: 5px;
+    right: 5px;
+    font-size: 0.75rem;
+    padding: 3px 6px;
+  }
+}
+
+@media (max-width: 420px) {
+  .restaurant-manage-card {
+    margin-bottom: 10px;
+  }
+
+  .manage-card-cover {
+    height: 70px;
+  }
+
+  .manage-logo-wrapper {
+    width: 50px;
+    height: 50px;
+    margin: -25px auto 0;
+  }
+
+  .manage-logo-img,
+  .manage-logo-placeholder {
+    border: 2px solid #fff;
+    font-size: 1rem;
+  }
+
+  .restaurant-manage-card .card-body {
+    padding: 0.5rem;
+  }
+
+  .restaurant-manage-card .card-title {
+    font-size: 0.95rem;
+  }
+
+  .restaurant-manage-card .card-text {
+    font-size: 0.85rem;
+  }
+
+  .manage-status-badge {
+    top: 4px;
+    right: 4px;
+    font-size: 0.7rem;
+    padding: 2px 5px;
+  }
+
+  .letter-spacing-1 {
+    letter-spacing: 0.5px;
+  }
 }
