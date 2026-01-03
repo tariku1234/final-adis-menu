@@ -1,7 +1,7 @@
 "use client"
 import { Container, Row, Col, Card, Navbar, Nav } from "react-bootstrap"
 import logo from "../img/addisMenu.jpg"
-import foodImage from "../img/food.jpg"
+import foodImage from "../img/menu.jpg"
 import "./MenuPage.css"
 
 export default function MenuPage() {

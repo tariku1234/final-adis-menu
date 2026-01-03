@@ -5,10 +5,17 @@
   --muted: #6b6b6b;
 }
  .menu-navbar .nav-link.active-menu-link {
-          color: var(--accent) !important; /* Or whatever your primary brand color is */
-          font-weight: bold;
-          border-bottom: 2px solid var(--accent); /* Optional: add a bottom border */
-        }
+  color: var(--accent) !important; /* Example: Use your accent color */
+  font-weight: bold;
+  border-bottom: 2px solid var(--accent); /* Example: Add a bottom border for visual emphasis */
+}
+.menu-section-container, /* Your dynamically rendered menu sections */
+#your-order,           /* The 'Your Order' section */
+#payment,              /* The 'Payment' section */
+#feedback {            /* The 'Feedback' section */
+  scroll-margin-top: 110px; /* Adjust this value if your navbar height changes. */
+  /* For mobile, you might need a different value in a media query if the navbar is smaller */
+}
 .public-menu-page {
   background-color: var(--bg);
   color: var(--text);

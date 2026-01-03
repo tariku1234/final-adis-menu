@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useParams, useNavigate, useSearchParams } from "react-router-dom"
 import { Container, Row, Col, Button, Modal, Navbar, Nav, Spinner, Form, Card, Accordion } from "react-bootstrap"
 import { Plus, Minus, Trash2, Copy, Star } from "lucide-react"
@@ -10,7 +10,7 @@ import { db } from "../services/firebase.service"
 // Services
 import { getRestaurantById, getMenuSections, getMenuItems } from "../services/restaurant.service"
 import { useCart } from "../context/CartContext"
-import foodImage from "../img/food.jpg"
+import foodImage from "../img/menu.jpg"
 import "./PublicMenuPage.css"
 
 
@@ -42,31 +42,6 @@ export default function PublicMenuPage() {
   const [showMobileOrder, setShowMobileOrder] = useState(false)
   const [featuredItem, setFeaturedItem] = useState(null)
   const [isMobileView, setIsMobileView] = useState(false)
-  const [activeSection, setActiveSection] = useState(null)
-
-  // FIX 1: Track navbar height reactively
-  const [navbarHeight, setNavbarHeight] = useState(0)
-  useEffect(() => {
-    const updateHeight = () => {
-      const nav = document.querySelector(".menu-navbar")
-      if (nav) setNavbarHeight(nav.offsetHeight)
-    }
-
-    updateHeight() // Initial call
-    window.addEventListener("resize", updateHeight)
-    // Also observe the navbar itself for changes (e.g., if content changes size)
-    const navObserver = new MutationObserver(updateHeight);
-    const navElement = document.querySelector(".menu-navbar");
-    if (navElement) {
-      navObserver.observe(navElement, { attributes: true, childList: true, subtree: true });
-    }
-
-    return () => {
-      window.removeEventListener("resize", updateHeight)
-      navObserver.disconnect();
-    };
-  }, [])
-
 
   // Track viewport width to render mobile-only elements reliably
   useEffect(() => {
@@ -85,13 +60,7 @@ export default function PublicMenuPage() {
           getMenuItems(restaurantId),
         ])
         if (res.success) setRestaurant(res.restaurant)
-        if (sec.success) {
-          const sortedSections = sec.sections.sort((a, b) => a.displayOrder - b.displayOrder);
-          setSections(sortedSections);
-          if (sortedSections.length > 0) {
-            setActiveSection(sortedSections[0].id);
-          }
-        }
+        if (sec.success) setSections(sec.sections.sort((a, b) => a.displayOrder - b.displayOrder))
         if (items.success) setMenuItems(items.items.filter((i) => i.isAvailable))
       } catch (err) {
         console.error("Error loading menu:", err)
@@ -110,80 +79,35 @@ export default function PublicMenuPage() {
     }
   }, [menuItems])
 
-  // Intersection Observer to update activeSection on scroll for automatic highlighting
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) { // When at least 50% of the section is visible
-            // Extract original ID, handling the "section-" prefix
-            const sectionId = entry.target.id.startsWith('section-') 
-              ? entry.target.id.replace('section-', '') 
-              : entry.target.id;
-            setActiveSection(sectionId);
-          }
-        });
-      },
-      { 
-        rootMargin: `-${navbarHeight}px 0px 0px 0px`, // Adjust rootMargin dynamically with navbar height
-        threshold: [0.1, 0.3, 0.5, 0.7, 0.9, 1.0] // Multiple thresholds for better detection
-      } 
-    );
-
-    // Observe all relevant elements
-    // Dynamically generate refs for menu sections
-    sections.forEach((section) => {
-      const el = document.getElementById(`section-${section.id}`);
-      if (el) observer.observe(el);
-    });
-    // Observe the "Order" and "Payment" sections
-    const orderEl = document.getElementById('your-order');
-    if (orderEl) observer.observe(orderEl);
-    const paymentEl = document.getElementById('payment');
-    if (paymentEl) observer.observe(paymentEl);
-    const feedbackEl = document.getElementById('feedback'); // Also observe feedback section
-    if (feedbackEl) observer.observe(feedbackEl);
-
-
-    return () => observer.disconnect();
-  }, [sections, navbarHeight]); // Rerun if sections or navbarHeight changes
-
-
-  // FIX 2: Replace scrollToSection
+  // SIMPLIFIED SCROLL FUNCTION - This should work
   const scrollToSection = (sectionId) => {
-    setActiveSection(sectionId); // Still update state for immediate feedback on click
-
-    // Construct the correct ID based on how sections are rendered
-    const targetElementId = sectionId.startsWith('section-') ? sectionId : `section-${sectionId}`;
-    const el = document.getElementById(targetElementId);
-
-    // Also check for the "your-order", "payment", and "feedback" IDs directly if not a menu section
-    const fallbackEl = document.getElementById(sectionId);
-
-    const finalEl = el || fallbackEl; // Use the section-prefixed ID first, then fallback to direct ID
-
-    if (!finalEl) {
-      console.warn(`Element with ID ${sectionId} not found for scrolling.`);
-      return;
-    }
-
-    // Close mobile navbar safely
-    const navbarCollapse = document.querySelector(".navbar-collapse");
-    if (navbarCollapse?.classList.contains("show")) {
-      navbarCollapse.classList.remove("show"); // Directly remove 'show' class
-      // No need for a button click, no need for setTimeout here.
-    }
-
-    requestAnimationFrame(() => {
-      // Use the dynamically tracked navbarHeight for accurate offset
-      const y = finalEl.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 12; // Adjusted offset
-      window.scrollTo({
-        top: y,
-        behavior: "smooth",
-      });
+    // Create a custom event to handle the scroll
+    const event = new CustomEvent('scrollToElement', {
+      detail: { sectionId }
     });
+    window.dispatchEvent(event);
   };
 
+  // Add this event listener in a useEffect
+  useEffect(() => {
+    const handleScrollToElement = (e) => {
+      const { sectionId } = e.detail;
+      const selector = sectionId === "your-order" || sectionId === "payment"
+        ? `#${sectionId}`
+        : `#section-${sectionId}`;
+
+      const element = document.querySelector(selector);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    window.addEventListener('scrollToElement', handleScrollToElement);
+
+    return () => {
+      window.removeEventListener('scrollToElement', handleScrollToElement);
+    };
+  }, []);
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text)
     alert("Copied to clipboard!")
@@ -313,37 +237,35 @@ export default function PublicMenuPage() {
                 <Nav.Link
                   key={s.id}
                   onClick={(e) => {
-                    e.preventDefault()
-                    scrollToSection(s.id)
+                    e.preventDefault();
+                    scrollToSection(s.id);
                   }}
-                  // UPDATE: Apply 'active-menu-link' class based on activeSection state
-                  className={`px-3 text-dark text-capitalize ${activeSection === s.id ? "active-menu-link" : ""}`}
-                  style={{ cursor: "pointer" }}
+                  className="px-3 text-dark text-capitalize"
+                  href={`#section-${s.id}`}
                 >
                   {s.name}
                 </Nav.Link>
+
               ))}
-              <Nav.Link
-                onClick={(e) => {
-                  e.preventDefault()
-                  scrollToSection("your-order")
-                }}
-                className={`px-3 text-dark ${activeSection === "your-order" ? "active-menu-link" : ""}`} // UPDATE: For 'Order' link
-                style={{ cursor: "pointer" }}
-              >
-                Order
-              </Nav.Link>
               <Nav.Link
                 onClick={(e) => {
                   e.preventDefault()
                   scrollToSection("payment")
                 }}
-                className={`px-3 text-dark ${activeSection === "payment" ? "active-menu-link" : ""}`} // UPDATE: For 'Payment' link
+                className="px-3 text-dark text-capitalize"
                 style={{ cursor: "pointer" }}
               >
                 Payment
               </Nav.Link>
-              
+              <Nav.Link
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToSection("feedback")
+                }}
+                className="px-3 text-dark text-capitalize" style={{ cursor: "pointer" }}
+              >
+                Feedback
+              </Nav.Link>
             </Nav>
             <div className="d-none d-lg-flex">
               <Form className="d-flex align-items-center" onSubmit={(e) => e.preventDefault()}>
@@ -369,8 +291,7 @@ export default function PublicMenuPage() {
         <div
           className="w-100 d-flex align-items-center justify-content-center text-center"
           style={{
-            // OPTIONAL IMPROVEMENT: Use isMobileView instead of window.innerWidth
-            height: !isMobileView ? "420px" : "360px", 
+            height: window.innerWidth >= 992 ? "420px" : "360px",
             backgroundImage: restaurant?.heroImage
               ? `url(${restaurant.heroImage})`
               : restaurant?.image
@@ -395,8 +316,7 @@ export default function PublicMenuPage() {
                 <h1
                   className="fw-bold mb-2"
                   style={{
-                    // OPTIONAL IMPROVEMENT: Use isMobileView instead of window.innerWidth
-                    fontSize: !isMobileView ? "3.6rem" : "2.1rem",
+                    fontSize: window.innerWidth >= 992 ? "3.6rem" : "2.1rem",
                     letterSpacing: "2px",
                     color: "var(--text)",
                   }}
@@ -439,8 +359,11 @@ export default function PublicMenuPage() {
               )
               if (filteredItems.length === 0) return null
               return (
-                // UPDATE: Ensure ID matches for scrolling and observation
-                <div key={section.id} id={`section-${section.id}`} className="mb-5">
+                <div
+                  key={section.id}
+                  id={`section-${section.id}`}
+                  className="mb-5"
+                >
                   <div className="menu-section-container">
                     <div className="section-title-wrapper">
                       <div className="section-title-text">{section.name}</div>
@@ -552,13 +475,11 @@ export default function PublicMenuPage() {
             })}
 
             {/* --- MOBILE ORDER SECTION (Visible only on Mobile, appears after Menu) --- */}
-            {/* UPDATE: Ensure ID is 'your-order' to match nav link */}
-            <div id="your-order" className="mt-5">
+            <div id="your-order" className="d-lg-none mt-5">
               <OrderContent />
             </div>
 
             {/* --- PAYMENT SECTION --- */}
-            {/* UPDATE: Ensure ID is 'payment' to match nav link */}
             <div id="payment" className="mt-5 pt-5 border-top">
               <h3 className="fw-bold text-center mb-4">Payment Methods</h3>
               <Card className="border-0 shadow-sm rounded-4 p-3 mx-auto" style={{ maxWidth: "600px" }}>
@@ -675,7 +596,7 @@ export default function PublicMenuPage() {
             <Card.Body className="p-4">
               <div className="d-flex justify-content-between">
                 <h3 className="fw-bold">
-                  <Plus size={18} className="me-2 plus-icon" aria-hidden="true" />
+
                   {selectedDish.name}
                 </h3>
                 <h4 className="fw-bold item-price-text">{selectedDish.price} ETB</h4>

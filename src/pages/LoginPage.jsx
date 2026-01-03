@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { Container, Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../context/AuthContext"
@@ -14,6 +14,18 @@ const LoginPage = () => {
   const { login, userRole } = useAuth()
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if (userRole) {
+      if (userRole === "super_admin") {
+        navigate("/super-admin/dashboard")
+      } else if (userRole === "restaurant_owner") {
+        navigate("/admin/restaurants")
+      } else if (userRole === "kitchen_manager") {
+        navigate("/kitchen/orders")
+      }
+    }
+  }, [userRole, navigate])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
@@ -21,23 +33,11 @@ const LoginPage = () => {
 
     const result = await login(email, password)
 
-    if (result.success) {
-      setTimeout(() => {
-        if (userRole === "super_admin") {
-          navigate("/super-admin/dashboard")
-        } else if (userRole === "restaurant_owner") {
-          navigate("/admin/restaurants")
-        } else if (userRole === "kitchen_manager") {
-          navigate("/kitchen/orders")
-        } else {
-          navigate("/")
-        }
-      }, 100)
-    } else {
+    if (!result.success) {
       setError(result.error || "Failed to login. Please check your credentials.")
+      setLoading(false)
     }
-
-    setLoading(false)
+    // If login succeeds, the useEffect above will handle navigation when userRole updates
   }
 
   return (

@@ -5,7 +5,6 @@ import { useParams, useNavigate } from "react-router-dom"
 import { Container, Card, Badge, Spinner, Alert, Button, ListGroup } from "react-bootstrap"
 import { onSnapshot, doc } from "firebase/firestore"
 import { db } from "../services/firebase.service"
-import AdminNavbar from "../components/AdminNavbar"
 import "./OrderTrackingPage.css"
 
 export default function OrderTrackingPage() {
@@ -61,9 +60,9 @@ export default function OrderTrackingPage() {
 
   if (loading) {
     return (
-      <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light">
-        <Spinner animation="border" variant="primary" />
-      </div>
+      <Container className="mt-5 text-center">
+        <Spinner animation="border" />
+      </Container>
     )
   }
 
@@ -87,8 +86,7 @@ export default function OrderTrackingPage() {
 
   return (
     <div className="order-tracking-page min-vh-100 bg-light py-5">
-      <AdminNavbar />
-      <Container>
+      <Container className="order-tracking-container py-5">
         <Card className="shadow-sm border-0 mb-4">
           <Card.Body className="p-4">
             <div className="text-center mb-4">
